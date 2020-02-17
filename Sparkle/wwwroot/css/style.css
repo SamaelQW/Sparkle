@@ -1,0 +1,23 @@
+﻿
+
+.posts {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.post {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border:1px solid gray;
+    margin: 10px 0 0 0;
+}
+
+.post__title {
+    color: #8c67a4;
+    font-weight: 600;
+}
+
+.post__body{
+    font-weight: 500;
+    padding: 0 0 0 0px;
+
+}

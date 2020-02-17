@@ -10,20 +10,27 @@ namespace Sparkle.Domain.Entities
     public class Post : IEntity
     {
         /// <summary>
-        /// Post id
+        /// The post id
         /// </summary>
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Post titile
+        /// The post title
         /// </summary>
         [BsonElement("title")]
         public string Title { get; set; }
+        
+        /// <summary>
+        /// The post body
+        /// </summary>
+        [BsonElement("body")]
+        public string Body { get; set; }
+
 
         /// <summary>
-        /// Post category
+        /// The post category
         /// </summary>
         [BsonElement("category")]
         public string Category { get; set; }

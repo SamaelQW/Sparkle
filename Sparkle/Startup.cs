@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Sparkle.Domain.Data;
+using Sparkle.Domain.Services;
 
 namespace Sparkle
 {
@@ -19,11 +22,22 @@ namespace Sparkle
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddRazorOptions(options =>
+            {
+                options.ViewLocationFormats.Add("/{0}.cshtml");
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
             services.AddControllersWithViews();
+
+
             services.Configure<SparkleDatabaseSettings>(
                 Configuration.GetSection(nameof(SparkleDatabaseSettings)));
 
-            services.AddTransient<ISparkleDatabaseSettings, SparkleDatabaseSettings>();
+            services.AddTransient<ISparkleDatabaseSettings, SparkleDatabaseSettings>(
+                sp => sp.GetRequiredService<IOptions<SparkleDatabaseSettings>>().Value);
+
+            services.AddTransient<PostService>();
+
 
         }
 

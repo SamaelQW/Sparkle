@@ -1,37 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Sparkle.Models;
+using Sparkle.Domain.Entities;
+using Sparkle.Domain.Services;
+using System.Threading.Tasks;
 
 namespace Sparkle.Controllers
 {
     public class HomeController : Controller
     {
+        #region Privete Members
         private readonly ILogger<HomeController> _logger;
+        private readonly PostService _postService;
 
-        public HomeController(ILogger<HomeController> logger)
+        #endregion
+
+        public HomeController(ILogger<HomeController> logger, PostService postService)
         {
             _logger = logger;
+            _postService = postService;
         }
 
+        [HttpGet]
+        [Route("/")]
+        [Route("/Index")]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        [Route("/AddPost")]
+        public IActionResult AddPost()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        [Route("/AddPost")]
+        public IActionResult AddPost(Post post)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _postService.Create(post);
+            return RedirectToAction("Index");
         }
+
     }
 }

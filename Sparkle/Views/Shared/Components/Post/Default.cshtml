@@ -1,0 +1,11 @@
+﻿@model  IEnumerable<Post>
+
+@{
+    foreach (var post in Model)
+    {
+        <div class="post">
+            <h3 class="post__title">@post.Title</h3>
+            <p class="post__body">@post.Body</p>
+        </div>
+    }
+}
