@@ -14,11 +14,15 @@ namespace Sparkle.Controllers
 
         #endregion
 
+        #region Constructor
         public HomeController(ILogger<HomeController> logger, PostService postService)
         {
             _logger = logger;
             _postService = postService;
         }
+        #endregion
+
+        #region Action Methods
 
         [HttpGet]
         [Route("/")]
@@ -40,8 +44,30 @@ namespace Sparkle.Controllers
         public IActionResult AddPost(Post post)
         {
             _postService.Create(post);
+            //UpdatePosts();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [Route("/Profile")]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private async void UpdatePosts()
+        {
+            foreach (var item in _postService.Get())
+            {
+                await _postService.UpdateAsync(item.Id, item);
+            }
+        }
+
+        #endregion
 
     }
 }

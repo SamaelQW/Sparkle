@@ -1,0 +1,11 @@
+﻿@mixin grid {
+    display: grid;
+    display: -moz-grid;
+    display: -ms-grid;
+}
+
+@mixin font($size: 17px, $weight: 500, $style: normal){
+    font-size: $size;
+    font-weight: $weight;
+    font-style: $style;
+}

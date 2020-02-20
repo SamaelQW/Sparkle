@@ -2,7 +2,11 @@
 @{
     ViewData["Title"] = "Posts";
 }
-
-<div class="posts">
-@await Component.InvokeAsync("Post")
+<div class="feed-container">
+    <div class="add-btn">
+        <a class="page-link add-link" asp-controller="Home" asp-action="AddPost">Add Post</a>
+    </div>
+    <div class="posts">
+        @await Component.InvokeAsync("Post")
+    </div>
 </div>

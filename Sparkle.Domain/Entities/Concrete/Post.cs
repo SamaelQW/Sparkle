@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace Sparkle.Domain.Entities
 {
@@ -21,7 +22,7 @@ namespace Sparkle.Domain.Entities
         /// </summary>
         [BsonElement("title")]
         public string Title { get; set; }
-        
+
         /// <summary>
         /// The post body
         /// </summary>
@@ -34,6 +35,12 @@ namespace Sparkle.Domain.Entities
         /// </summary>
         [BsonElement("category")]
         public string Category { get; set; }
+
+        /// <summary>
+        /// The post created date
+        /// </summary>
+        [BsonElement("createdDate")]
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
     }
 }
