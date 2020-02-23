@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Sparkle.Domain.Data;
 using Sparkle.Domain.Services;
+using System.Security.Principal;
 
 namespace Sparkle
 {
@@ -14,6 +17,7 @@ namespace Sparkle
     {
         public Startup(IConfiguration configuration)
         {
+
             Configuration = configuration;
         }
 
@@ -26,8 +30,21 @@ namespace Sparkle
             {
                 options.ViewLocationFormats.Add("/{0}.cshtml");
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            
+
+
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new PathString("/Account/Login");
+                });
+
+            // Inject IPrincipal
+            services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
+
 
 
             services.Configure<SparkleDatabaseSettings>(
@@ -37,7 +54,7 @@ namespace Sparkle
                 sp => sp.GetRequiredService<IOptions<SparkleDatabaseSettings>>().Value);
 
             services.AddTransient<PostService>();
-
+            services.AddTransient<UserService>();
 
         }
 
@@ -60,6 +77,10 @@ namespace Sparkle
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
+
+
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -52,7 +52,8 @@ namespace Sparkle.Controllers
         [Route("/Profile")]
         public IActionResult Profile()
         {
-            return View();
+
+            return View("Profile",User.Identity.Name);
         }
 
         #endregion

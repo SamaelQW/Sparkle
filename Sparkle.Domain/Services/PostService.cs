@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.AspNet.Identity;
+using MongoDB.Driver;
 using Sparkle.Domain.Data;
 using Sparkle.Domain.Entities;
 using System.Collections.Generic;

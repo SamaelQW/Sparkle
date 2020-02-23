@@ -16,8 +16,11 @@
             </div>
             <div class="header__search search">
                 <input type="text" class="search__box search_border_none" />
-                <input type="button" class="search__button search_border_none" value="Search"/>
+                <input type="button" class="search__button search_border_none" value="Search" />
             </div>
+
+            @await  Component.InvokeAsync("LoginBar")
+
         </header>
         <nav class="nav">
             <a asp-action="Profile" asp-controller="Home" class="nav__link">My page</a>

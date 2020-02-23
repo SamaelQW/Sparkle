@@ -1,0 +1,16 @@
+﻿@model  LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Login" asp-controller="Account" class="login-from">
+    @Html.LabelFor(m => m.UserName)
+    @Html.EditorFor(m=>m.UserName)
+    @Html.LabelFor(m => m.Password)
+    @Html.EditorFor(m=>m.Password)
+    
+    <input type="submit" value="Login" asp-action="Login" asp-controller="Account" />
+
+</form>
+    

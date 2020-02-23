@@ -5,14 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNet.Identity.MongoDB" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.3" />
+    <PackageReference Include="Microsoft.Owin" Version="4.1.0" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Owin.Security" Version="4.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Sparkle.Domain\Sparkle.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Authorization\" />
   </ItemGroup>
 
 

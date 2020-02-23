@@ -1,0 +1,17 @@
+﻿@model  Util
+
+<div class="login-bar">
+    @if(Model.IfAuthorize())
+    {
+        <div class="sign-out">
+            <a class="sign-out__button" asp-controller="Account" asp-action="Logout">Sing out</a>
+        </div>
+    }
+    else
+    {
+        <div class="sign-in">
+            <a class="sign-in__button" asp-action="Login" asp-controller="Account">Sing in</a>
+        </div>
+    }
+
+</div>
