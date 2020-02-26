@@ -9,8 +9,14 @@ var paths = {
 };
 
 // регистрируем задачу для конвертации файла scss в css
-gulp.task("sass", function () {
+gulp.task("style", function () {
     return gulp.src('Styles/style.scss')
+        .pipe(sass())
+        .pipe(gulp.dest(paths.webroot + '/css'));
+});
+
+gulp.task("login", function () {
+    return gulp.src('Styles/login.scss')
         .pipe(sass())
         .pipe(gulp.dest(paths.webroot + '/css'));
 });

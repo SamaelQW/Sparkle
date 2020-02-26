@@ -3,11 +3,13 @@
 @{
     foreach (var post in Model)
     {
+    <a asp-action="Index" asp-controller="Post" asp-route-postId="@post.Id" >
         <div class="post">
             <h3 class="post__title">@post.Title</h3>
             <p class="post__body">@post.Body</p>
             <p class="post__created-time">@post.CreatedDate.ToString("dd/MM/yyyy HH:mm")</p>
         </div>
+    </a>
     }
     
 }

@@ -1,0 +1,59 @@
+﻿@model PostViewModel
+
+@{
+    ViewData["Title"] = Model.Post.Title;
+}
+    <div class="post-content">
+
+        <div class="post-content__title">@Model.Post.Title</div>
+
+
+        <div class="post-content__category">@Model.Post.Category</div>
+        <div class="post-content__date">@Model.Post.CreatedDate.ToString("dd/MM/yyyy HH:mm")</div>
+        <div class="separator"></div>
+        <div class="post-content__body">
+            @Model.Post.Body
+        </div>
+        <div class="separator"></div>
+        <div class="post-content__comments">
+            @if (Model.Post.Comments == null || Model.Post.Comments.Count == 0)
+            {
+                <div class="no-comments">
+                    No comments yet.
+                </div>
+            }
+            else
+            {
+                foreach (Comment comment in Model.Post.Comments)
+                {
+                    <div class="comment">
+                        <div class="comment__owner">
+                            <a href="#"> @comment.OwnerName @comment.OwnerSurname </a>
+                        </div>
+                        <div class="comment__body">
+                            @comment.Body
+                        </div>
+                        <div class="comment__created-date">
+                            @comment.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+
+
+        <div class="add-comment-area">
+            <form method="post" asp-action="Index" asp-controller="Post">
+
+                <input type="hidden" name="PostId" value="@Model.Post.Id" />
+                <input type="hidden" name="OwnerName" value="@Model.User.Name" />
+                <input type="hidden" name="OwnerSurname" value="@Model.User.Surname" />
+                <input type="hidden" name="OwnerUserName" value="@Model.User.UserName" />
+                
+
+                <textarea name="Body" placeholder="Comment"></textarea>
+                <input type="submit" value="Send" asp-action="Index" asp-controller="Post"  />
+            </form>
+        </div>
+    </div>

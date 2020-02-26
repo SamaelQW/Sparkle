@@ -8,8 +8,24 @@ namespace Sparkle.Models
     /// </summary>
     public class RegisterViewModel
     {
+
         /// <summary>
-        /// The User UserName
+        /// The user's name
+        /// </summary>
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The user's surname
+        /// </summary>
+        [Required]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+
+        /// <summary>
+        /// The User's UserName
         /// </summary>
         [Required]
         [Display(Name = "Username")]

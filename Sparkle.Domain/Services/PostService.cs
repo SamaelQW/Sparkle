@@ -32,7 +32,7 @@ namespace Sparkle.Domain.Services
 
         #region Public Members
 
-        private string pattern = "{title:1,body:1,createdDate:1}";
+        private string pattern = "{}";
         #region Async Methods
 
         /// <summary>
@@ -41,8 +41,22 @@ namespace Sparkle.Domain.Services
         /// <returns></returns>
         public Task<List<Post>> GetAsync()
         {
-            return _posts.Find("{}").Project<Post>(pattern).ToListAsync();
+            return _posts.FindAsync("{}").Result.ToListAsync();
         }
+
+        /// <summary>
+        /// Get <see cref="Post"/> by <paramref name="postId"/>
+        /// </summary>
+        /// <param name="postId">The id of post</param>
+        /// <returns></returns>
+        public Task<Post> GetAsync(string postId)
+        {
+            var filterBuilder = new FilterDefinitionBuilder<Post>();
+            var filter = filterBuilder.Eq(post => post.Id, postId);
+
+            return _posts.FindAsync(filter).Result.FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// Delete the <paramref name="post"/> from database
         /// </summary>
@@ -90,6 +104,22 @@ namespace Sparkle.Domain.Services
         {
             return _posts.Find("{}").Project<Post>(pattern).ToList();
         }
+
+
+
+        /// <summary>
+        /// Get post by id
+        /// </summary>
+        /// <param name="postId">Post id</param>
+        /// <returns></returns>
+        public Post Get(string postId)
+        {
+            var filterBuider = new FilterDefinitionBuilder<Post>();
+            var filter = filterBuider.Eq(post => post.Id, postId);
+            return _posts.Find(filter).FirstOrDefault();
+        }
+
+
 
         /// <summary>
         /// Update the post by <paramref name="postId"/>

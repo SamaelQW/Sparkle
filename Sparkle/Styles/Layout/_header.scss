@@ -25,53 +25,89 @@
     justify-content: space-between;
     align-items: center;
     background-image: linear-gradient(0deg, rgba(106,222,231,1) 0%, rgba(255,167,248,1) 100%);
-    z-index:1;
-}
+    z-index: 1;
 
-.header__logo {
-    .logo {
+    &__logo {
+        .logo {
 
-        &__img {
-            height: 75px;
-            width: 75px;
+            &__img {
+                height: 75px;
+                width: 75px;
+            }
         }
     }
-}
 
-.header__search {
-    .search {
-        &__box {
-            height: 25px;
-            border-radius: 50px 50px;
-            outline: none;
-            padding-left: 5px;
-            @include font();
+    &__search {
+        .search {
+            &__box {
+                height: 25px;
+                border-radius: 50px 50px;
+                outline: none;
+                padding-left: 5px;
+                @include font();
+            }
+
+            &__button {
+                margin-left: 10px;
+                height: 25px;
+                border: none;
+                border-radius: 75px 75px;
+                width: 100px;
+                text-align: center;
+                outline: none;
+                background-color: #A1A6B4;
+                box-shadow: 1px 1px 10px 1px #3D52D5;
+                @include font($style:bold);
+                letter-spacing: .19em;
+                cursor: pointer;
+                color: #ffffff;
+
+                &:hover {
+                    background-color: darken(#A1A6B4, 10%);
+                    box-shadow: 1px 1px 10px 1px darken(#3D52D5, 10%);
+                }
+
+                &:active {
+                    transform: scaleY(15px);
+                    box-shadow: 1px 1px 30px 1px darken(#3D52D5, 10%);
+                }
+            }
         }
+    }
 
-        &__button {
-            margin-left: 10px;
-            height: 25px;
-            border: none;
-            border-radius: 75px 75px;
-            width: 100px;
-            text-align: center;
-            outline: none;
-            background-color: #A1A6B4;
-            box-shadow: 1px 1px 10px 1px #3D52D5;
-            @include font($style:bold);
-            letter-spacing: .19em;
-            cursor: pointer;
-            color: #ffffff;
+    &__sign-out {
+        a {
+            text-decoration: none;
+            @include font($size: 20px,$weight: 600);
+            color: #bc2121;
+            position: relative;
 
             &:hover {
-                background-color: darken(#A1A6B4, 10%);
-                box-shadow: 1px 1px 10px 1px darken(#3D52D5, 10%);
+                color: darken(#bc2121,10%);
             }
+        }
 
-            &:active {
-                transform: scaleY(15px);
-                box-shadow: 1px 1px 30px 1px darken(#3D52D5, 10%);
+        .sign-out {
+            &__button {
+                &::before {
+                    content: '';
+                    bottom: 0%;
+                    left: 0%;
+                    width: 100%;
+                    height: 2px;
+                    position: absolute;
+                    background-color: #000;
+                    transition: .2s;
+                    transform: scaleX(0);
+                }
+
+                &:hover::before {
+                    transform: scaleX(1);
+                }
             }
         }
     }
 }
+
+
+

@@ -30,23 +30,40 @@ namespace Sparkle.Domain.Services
         #region Public Methods
 
         #region Sync
-
+        /// <summary>
+        /// Add an <paramref name="user"/> in database
+        /// </summary>
+        /// <param name="user">User entity to create</param>
         public void Create(User user)
         {
             _users.InsertOne(user);
         }
 
+        /// <summary>
+        /// Delete <paramref name="user"/> from database by id
+        /// </summary>
+        /// <param name="user">User to delete must contain id</param>
         public void Delete(User user)
         {
             _users.DeleteOne(u => u.Id == user.Id);
         }
 
+        /// <summary>
+        /// Get <see cref="User"/> from database by id
+        /// </summary>
+        /// <param name="id">User's id</param>
+        /// <returns>User with <paramref name="id"/></returns>
         public User Get(string id)
         {
             return _users.Find($"_id: {id}").FirstOrDefault();
 
         }
 
+        /// <summary>
+        /// Get <see cref="User"/> from database by usernama
+        /// </summary>
+        /// <param name="userName">User's username</param>
+        /// <returns>User with <paramref name="userName"/></returns>
         public User GetByUserName(string userName)
         {
             var filterBuilder = new FilterDefinitionBuilder<User>();
@@ -55,6 +72,10 @@ namespace Sparkle.Domain.Services
 
         }
 
+        /// <summary>
+        /// Update <paramref name="user"/> in database by id
+        /// </summary>
+        /// <param name="user">User to update</param>
         public void Update(User user)
         {
             _users.ReplaceOne(u => u.Id == user.Id, user);

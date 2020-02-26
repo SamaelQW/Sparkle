@@ -1,3 +1,20 @@
-﻿.profile-content{
-    flex: auto;
+﻿.profile-content {
+    display: flex;
+    flex-direction: column;
+
+    &__full-name {
+        align-self: flex-end;
+        margin-right: 1em;
+    }
+
+    &__user-posts {
+        width: auto;
+        align-self: flex-end;
+        margin-right: 3em;
+
+        .post {
+            width: 400px;
+           
+        }
+    }
 }

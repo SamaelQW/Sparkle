@@ -19,7 +19,12 @@
                 <input type="button" class="search__button search_border_none" value="Search" />
             </div>
 
-            @await  Component.InvokeAsync("LoginBar")
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="header__sign-out sign-out">
+                    <a class="sign-out__button" asp-controller="Account" asp-action="Logout">Sing out</a>
+                </div>
+            }
 
         </header>
         <nav class="nav">

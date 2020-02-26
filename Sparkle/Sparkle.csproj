@@ -19,10 +19,6 @@
     <ProjectReference Include="..\Sparkle.Domain\Sparkle.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Authorization\" />
-  </ItemGroup>
-
 
 
 </Project>
