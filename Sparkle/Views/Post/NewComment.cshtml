@@ -1,0 +1,13 @@
+﻿@model Sparkle.Domain.Entities.Comment
+
+    <div class="comment">
+        <div class="comment__owner">
+            <a href="#"> @Model.OwnerName @Model.OwnerSurname </a>
+        </div>
+        <div class="comment__body">
+            @Model.Body
+        </div>
+        <div class="comment__created-date">
+            @Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+        </div>
+    </div>

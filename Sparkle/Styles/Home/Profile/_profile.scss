@@ -1,10 +1,16 @@
-﻿.profile-content {
+﻿@import "../../Data/variables";
+@import "../../Data/mixins";
+
+.profile-content {
+    border-radius: inherit;
+    background-color: #29a33b;
     display: flex;
     flex-direction: column;
+    font-family: 'Comic Sans MS';
 
     &__full-name {
-        align-self: flex-end;
-        margin-right: 1em;
+        align-self: flex-start;
+        margin-left: 1em;
     }
 
     &__user-posts {
@@ -14,7 +20,20 @@
 
         .post {
             width: 400px;
-           
         }
+    }
+
+    .separator {
+        border-top: 1px solid #000;
+    }
+
+    &__info {
+        @include font($weight: 600);
+        align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to bottom, #8a4949, #573d63);
+        padding: 10px;
+        color:white;
     }
 }

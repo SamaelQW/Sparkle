@@ -14,8 +14,7 @@
     border-style: solid;
     border-color: #b8c051;
     margin: 5px 0px 10px 0px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     border-radius: 15px;
     box-shadow: 10px 10px 10px 0px #3d216e;
     transition-property: all;
@@ -26,16 +25,36 @@
         box-shadow: 10px 10px 10px 0px lighten(#3d216e,20%);
     }
 
-    &__title {
+
+
+    .post__title {
         color: #8c67a4;
         font-weight: 600;
         justify-self: center;
+        text-align: center;
         align-self: center;
+        width: 100%;
+        margin: 0;
+        height: max-content;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row: 1;
+
+        a {
+            align-self: center;
+            width: 100%;
+            color: #8c67a4;
+            display: block;
+        }
     }
+
 
     &__body {
         font-weight: 500;
-        padding: 0 0 0 0px;
+        padding: 5px;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row: 2;
     }
 
     &__created-time {
@@ -44,9 +63,51 @@
         font-weight: 600;
         color: lightslategray;
         cursor: default;
+        grid-row: 3;
+        grid-column: 2;
+        justify-self: end;
 
         &:hover {
             color: darken(lightslategray, 50%);
+        }
+    }
+
+    &__like {
+        .liked {
+            color: red;
+        }
+
+        transition: .2s;
+        justify-content: left;
+        cursor: pointer;
+        grid-row: 3;
+        grid-column: 1;
+        width: max-content;
+        left: 0;
+        bottom: 0;
+        margin-left: 10px;
+        padding: 2px;
+        border: none;
+        border-radius: 15px 15px;
+
+        &:hover {
+            background-color: #3d216e;
+        }
+    }
+
+    &__comment {
+
+        grid-row: 3;
+        grid-column: 1;
+        margin-left: 60px;
+        padding: 2px;
+
+        img {
+            height: 15px;
+            width: 15px;
+            position: absolute;
+            padding-top: 3px;
+            margin-left: -18px;
         }
     }
 }

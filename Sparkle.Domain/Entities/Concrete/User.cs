@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -50,8 +51,6 @@ namespace Sparkle.Domain.Entities
         [BsonElement("surname")]
         public string Surname { get; set; }
 
-
-
         /// <summary>
         /// The user age
         /// </summary>
@@ -59,7 +58,12 @@ namespace Sparkle.Domain.Entities
         public int Age { get; set; }
 
         /// <summary>
-        /// User's posts ID's 
+        /// The user's date of births 
+        /// </summary>
+        public DateTime DateOfBirth { get; set; }
+
+        /// <summary>
+        /// User's posts IDs 
         /// </summary>
         [BsonElement("usersPosts")]
         public IEnumerable<string> PostIds { get; set; }

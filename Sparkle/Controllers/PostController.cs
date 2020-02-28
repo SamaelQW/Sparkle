@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Sparkle.Domain.Entities;
 using Sparkle.Domain.Services;
 using Sparkle.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sparkle.Controllers
@@ -15,14 +14,15 @@ namespace Sparkle.Controllers
         #region Private Members
         private readonly PostService _postService;
         private readonly UserService _userService;
-
-
+        private readonly CommentService _commentService;
+        private Comment lastComment;
         #endregion
 
-        public PostController(PostService postService, UserService userService)
+        public PostController(PostService postService, UserService userService, CommentService commentService)
         {
             _postService = postService;
             _userService = userService;
+            _commentService = commentService;
         }
 
 
@@ -42,26 +42,38 @@ namespace Sparkle.Controllers
         [Route("Post/{postId}")]
         public async Task<IActionResult> Index(string postId, AddCommentViewModel model)
         {
-            var post = await _postService.GetAsync(model.PostId);
-            if (post.Comments == null)
-            {
-                post.Comments = new List<Comment>();
-            }
-            post.Comments.Add(new Comment()
+            var comment = new Comment()
             {
                 Body = model.Body,
                 CreatedDate = model.Created,
                 OwnerName = model.OwnerName,
                 OwnerSurname = model.OwnerSurname,
-                OwnerUserName = model.OwnerUserName,
-
-            });
-            await _postService.UpdateAsync(post.Id, post);
-
-
-            return RedirectToAction("Index","Post", model.PostId);
+                OwnerUserName = model.OwnerUserName
+            };
+            await _commentService.AddCommentAsync(postId, comment);
+            lastComment = comment;
+            return RedirectToAction("Index", "Post", model.PostId);
         }
 
+
+        #region Helper Methods
+
+        public PartialViewResult NewComment()
+        {
+            return PartialView(lastComment);
+        }
+
+        [HttpPost]
+        [Route("Post/RemovePost/{postId}")]
+        public async Task<IActionResult> RemovePost(string postId)
+        {
+            await _postService.RemoveAsync(postId);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        #endregion
 
 
     }

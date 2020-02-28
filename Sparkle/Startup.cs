@@ -42,11 +42,10 @@ namespace Sparkle
                     options.LoginPath = new PathString("/Account/Login");
                 });
 
-            // Inject IPrincipal
             services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
 
 
-
+            /// My configuration
             services.Configure<SparkleDatabaseSettings>(
                 Configuration.GetSection(nameof(SparkleDatabaseSettings)));
 
@@ -55,7 +54,8 @@ namespace Sparkle
 
             services.AddTransient<PostService>();
             services.AddTransient<UserService>();
-
+            services.AddTransient<LikeService>();
+            services.AddTransient<CommentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,7 +84,7 @@ namespace Sparkle
 
             app.UseEndpoints(endpoints =>
             {
-                
+
 
                 endpoints.MapControllerRoute(
                     name: "default",

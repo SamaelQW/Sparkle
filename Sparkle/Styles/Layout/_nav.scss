@@ -5,18 +5,19 @@
     height: 500px;
     background-color: #566c9a;
     border-radius: 10px 10px;
-
     //---------------
     grid-row-start: 2;
     grid-row-end: 4;
     grid-column: 1;
     //---------------
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 
 
     &__link {
         text-decoration: none;
+        width: max-content;
+        align-self: center;
         @include font();
         text-align: center;
         color: #ffffff;

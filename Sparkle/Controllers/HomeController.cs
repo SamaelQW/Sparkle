@@ -7,6 +7,7 @@ using Sparkle.Domain.Services;
 using Sparkle.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Sparkle.Controllers
 {
@@ -17,16 +18,18 @@ namespace Sparkle.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly PostService _postService;
         private readonly UserService _userService;
+        private readonly LikeService _likeService;
+
         private UserProfileViewModel user;
         #endregion
 
         #region Constructor
-        public HomeController(ILogger<HomeController> logger, PostService postService, UserService userService)
+        public HomeController(ILogger<HomeController> logger, PostService postService, UserService userService, LikeService likeService)
         {
             _logger = logger;
             _postService = postService;
             _userService = userService;
-
+            _likeService = likeService;
         }
         #endregion
 
@@ -41,7 +44,6 @@ namespace Sparkle.Controllers
         [Route("/Index")]
         public IActionResult Index()
         {
-           
             return View();
         }
 
@@ -88,7 +90,56 @@ namespace Sparkle.Controllers
             return View(user);
         }
 
+
+        /// <summary>
+        /// View to edit user data
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/Edit")]
+        public IActionResult Edit()
+        {
+            return View(GetUser());
+        }
+
+        [HttpPost]
+        [Route("/Edit")]
+        public async Task<IActionResult> Edit(UserProfileViewModel user)
+        {
+            User newUser = new User()
+            {
+                Age = user.User.Age,
+                DateOfBirth = user.User.DateOfBirth,
+                Email = user.User.Email,
+                Name = user.User.Name,
+                Password = user.User.Password,
+                PostIds = user.User.PostIds,
+                Status = user.User.Status,
+                Surname = user.User.Surname,
+                UserName = user.User.UserName,
+                Id = user.User.Id,
+            };
+
+            await _userService.UpdateAsync(newUser);
+
+            return RedirectToAction("Profile");
+        }
+
+
         #endregion
+
+        #region Helper Methods
+
+
+        [Route("Home/LikePressed/{postId}")]
+        public async Task<EmptyResult> LikePressed(string postId)
+        {
+            await _likeService.LikeAsync(postId, User.Identity.Name);
+            return new EmptyResult();
+        }
+
+        #endregion
+
 
         #region Private Members
 

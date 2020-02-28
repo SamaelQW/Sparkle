@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using Sparkle.Domain.Data;
 using Sparkle.Domain.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sparkle.Domain.Services
@@ -49,6 +50,16 @@ namespace Sparkle.Domain.Services
         }
 
         /// <summary>
+        /// Get all users from db
+        /// </summary>
+        /// <returns></returns>
+        public List<User> Get()
+        {
+            return _users.Find("{}").ToList();
+        }
+
+
+        /// <summary>
         /// Get <see cref="User"/> from database by id
         /// </summary>
         /// <param name="id">User's id</param>
@@ -82,21 +93,51 @@ namespace Sparkle.Domain.Services
         }
         #endregion
         #region Async
+
+        /// <summary>
+        /// Add user in database
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public Task CreateAsync(User user)
         {
             return _users.InsertOneAsync(user);
         }
 
+        /// <summary>
+        /// Remove user from db
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public Task DeleteAsync(User user)
         {
             return _users.DeleteOneAsync(u => u.Id == user.Id);
         }
 
+        /// <summary>
+        /// Get all users from db
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<User>> GetAsync()
+        {
+            return _users.FindAsync("{}").Result.ToListAsync();
+        }
+
+        /// <summary>
+        /// Get user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Task<User> GetAsync(string id)
         {
             return _users.FindAsync($"_id: {id}").Result.FirstOrDefaultAsync();
         }
 
+        /// <summary>
+        /// Get user by username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public Task<User> GetByUserNameAsync(string userName)
         {
             var filterBuilder = new FilterDefinitionBuilder<User>();
@@ -104,6 +145,11 @@ namespace Sparkle.Domain.Services
             return _users.FindAsync(filter).Result.FirstOrDefaultAsync();
         }
 
+        /// <summary>
+        ///  Update user in db
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public Task UpdateAsync(User user)
         {
             return _users.ReplaceOneAsync(u => u.Id == user.Id, user);

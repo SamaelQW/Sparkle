@@ -101,9 +101,11 @@ a {
   grid-row-end: 4;
   grid-column: 1;
   display: flex;
-  justify-content: center; }
+  flex-direction: column; }
   .nav__link {
     text-decoration: none;
+    width: max-content;
+    align-self: center;
     font-size: 17px;
     font-weight: 500;
     font-style: normal;
@@ -159,8 +161,7 @@ a {
   border-style: solid;
   border-color: #b8c051;
   margin: 5px 0px 10px 0px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   border-radius: 15px;
   box-shadow: 10px 10px 10px 0px #3d216e;
   transition-property: all;
@@ -168,22 +169,68 @@ a {
   background-color: #b7b7b7; }
   .post:hover {
     box-shadow: 10px 10px 10px 0px #6939bc; }
-  .post__title {
+  .post .post__title {
     color: #8c67a4;
     font-weight: 600;
     justify-self: center;
-    align-self: center; }
+    text-align: center;
+    align-self: center;
+    width: 100%;
+    margin: 0;
+    height: max-content;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1; }
+    .post .post__title a {
+      align-self: center;
+      width: 100%;
+      color: #8c67a4;
+      display: block; }
   .post__body {
     font-weight: 500;
-    padding: 0 0 0 0px; }
+    padding: 5px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 2; }
   .post__created-time {
     margin: 0 10px 0 auto;
     font-size: 12px;
     font-weight: 600;
     color: lightslategray;
-    cursor: default; }
+    cursor: default;
+    grid-row: 3;
+    grid-column: 2;
+    justify-self: end; }
     .post__created-time:hover {
       color: #07090a; }
+  .post__like {
+    transition: .2s;
+    justify-content: left;
+    cursor: pointer;
+    grid-row: 3;
+    grid-column: 1;
+    width: max-content;
+    left: 0;
+    bottom: 0;
+    margin-left: 10px;
+    padding: 2px;
+    border: none;
+    border-radius: 15px 15px; }
+    .post__like .liked {
+      color: red; }
+    .post__like:hover {
+      background-color: #3d216e; }
+  .post__comment {
+    grid-row: 3;
+    grid-column: 1;
+    margin-left: 60px;
+    padding: 2px; }
+    .post__comment img {
+      height: 15px;
+      width: 15px;
+      position: absolute;
+      padding-top: 3px;
+      margin-left: -18px; }
 
 .feed-container {
   display: flex;
@@ -220,27 +267,82 @@ a {
     transform: scaleX(1); }
 
 .profile-content {
+  border-radius: inherit;
+  background-color: #29a33b;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  font-family: 'Comic Sans MS'; }
   .profile-content__full-name {
-    align-self: flex-end;
-    margin-right: 1em; }
+    align-self: flex-start;
+    margin-left: 1em; }
   .profile-content__user-posts {
     width: auto;
     align-self: flex-end;
     margin-right: 3em; }
     .profile-content__user-posts .post {
       width: 400px; }
+  .profile-content .separator {
+    border-top: 1px solid #000; }
+  .profile-content__info {
+    font-size: 17px;
+    font-weight: 600;
+    font-style: normal;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #8a4949, #573d63);
+    padding: 10px;
+    color: white; }
+
+.add-post_content {
+  background-color: #835d68;
+  border-radius: inherit;
+  height: 100%;
+  display: flex;
+  flex-direction: column; }
+  .add-post_content h1 {
+    margin: 0;
+    padding-left: 15px;
+    flex-basis: 100%;
+    text-align: center;
+    color: #a2b600;
+    width: max-content;
+    align-self: center; }
+  .add-post_content .add-post__form {
+    display: inherit;
+    flex-direction: column;
+    font-family: 'Comic Sans MS'; }
+    .add-post_content .add-post__form input, .add-post_content .add-post__form textarea {
+      align-self: center;
+      min-height: 25px;
+      min-width: 300px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 25px 25px;
+      padding-left: 15px;
+      outline: none; }
+    .add-post_content .add-post__form textarea {
+      max-width: 300px;
+      min-height: 40px; }
 
 .post-content {
   height: 100%;
-  background-color: #76cce0;
+  background-color: #5db86b;
   display: flex;
   flex-direction: column;
   font-family: 'Comic Sans MS';
   font-size: 17px;
   font-weight: 500;
   font-style: normal; }
+  .post-content .post__remove-btn {
+    position: absolute;
+    align-self: flex-end;
+    padding: 10px 5px 0 0;
+    cursor: pointer; }
+    .post-content .post__remove-btn img {
+      height: 25px;
+      width: 25px; }
   .post-content__title {
     align-self: center;
     font-size: 26px;

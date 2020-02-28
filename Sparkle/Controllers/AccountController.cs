@@ -84,7 +84,6 @@ namespace Sparkle.Controllers
         #region Register Actions
         [HttpGet]
         [AllowAnonymous]
-       
         public IActionResult Register()
         {
             return View();
@@ -104,12 +103,13 @@ namespace Sparkle.Controllers
                     {
                         Email = model.Email,
                         UserName = model.UserName,
-                        Age = DateTime.Now.Year - Convert.ToInt32(model.Year),
+                        Age = DateTime.Now.Year - Convert.ToInt32(model.Year.Year),
                         Password = model.Password,
                         Name = model.Name,
                         Surname = model.Surname,
                         PostIds = null,
-                        Status = EUserStatus.Active
+                        Status = EUserStatus.Active,
+                        DateOfBirth = model.Year
                     });
 
                     await Authenticate(model.UserName);

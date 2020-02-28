@@ -29,6 +29,7 @@ namespace Sparkle.Tests
             user.Id = result.Id;
             Assert.AreEqual(user, result);
         }
+
         [TestMethod]
         public void UserService_Delete()
         {
@@ -46,6 +47,8 @@ namespace Sparkle.Tests
             service.Delete(user);
 
         }
+
+        
 
 
         private User Init()

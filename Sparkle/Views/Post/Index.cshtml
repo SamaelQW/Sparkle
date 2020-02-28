@@ -6,6 +6,11 @@
     <div class="post-content">
 
         <div class="post-content__title">@Model.Post.Title</div>
+        
+        @if(Model.User.UserName == Model.Post.OwnerUserName)
+        {
+            <div class="post__remove-btn" onclick="removePost('@Model.Post.Id')"><img alt="Remove post" src="https://img.icons8.com/ios/50/000000/delete-sign.png"></div>
+        }
 
 
         <div class="post-content__category">@Model.Post.Category</div>
@@ -26,17 +31,7 @@
             {
                 foreach (Comment comment in Model.Post.Comments)
                 {
-                    <div class="comment">
-                        <div class="comment__owner">
-                            <a href="#"> @comment.OwnerName @comment.OwnerSurname </a>
-                        </div>
-                        <div class="comment__body">
-                            @comment.Body
-                        </div>
-                        <div class="comment__created-date">
-                            @comment.CreatedDate.ToString("dd/MM/yyyy HH:mm")
-                        </div>
-                    </div>
+                   await Html.RenderPartialAsync("NewComment", comment);
                 }
             }
         </div>
@@ -44,7 +39,7 @@
 
 
         <div class="add-comment-area">
-            <form method="post" asp-action="Index" asp-controller="Post">
+            <form method="post" asp-action="Index" asp-controller="Post" >
 
                 <input type="hidden" name="PostId" value="@Model.Post.Id" />
                 <input type="hidden" name="OwnerName" value="@Model.User.Name" />
@@ -53,7 +48,7 @@
                 
 
                 <textarea name="Body" placeholder="Comment"></textarea>
-                <input type="submit" value="Send" asp-action="Index" asp-controller="Post"  />
+                <input type="submit" value="Send" asp-action="Index" asp-controller="Post" onclick="renderNewComment()" />
             </form>
         </div>
     </div>

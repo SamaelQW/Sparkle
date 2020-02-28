@@ -1,4 +1,5 @@
 ﻿using Sparkle.Domain.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 namespace Sparkle.Models
 {
@@ -44,7 +45,8 @@ namespace Sparkle.Models
         /// </summary>
         [Required]
         [Display(Name = "Date of birth")]
-        public string Year { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Year { get; set; }
 
 
         /// <summary>
