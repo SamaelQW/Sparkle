@@ -1,0 +1,10 @@
+﻿@model Comment
+
+
+    <div class="mini-comment">
+        <div class="mini-comment__owner-name">
+            <a href="#"> @Model.OwnerName @Model.OwnerSurname</a>
+        </div>
+        <div class="mini-comment__body">@Model.Body</div>
+        <div class="mini-comment__date">@Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")</div>
+    </div>

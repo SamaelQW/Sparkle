@@ -23,8 +23,17 @@
         }
     }
 
+    &__edit-btn{
+            @include font($size: 20px, $weight: 600);
+            align-self: flex-end;
+            margin-right: 15px;
+            a{
+                color: #b51515;
+            }
+    }
+
     .separator {
-        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
     }
 
     &__info {

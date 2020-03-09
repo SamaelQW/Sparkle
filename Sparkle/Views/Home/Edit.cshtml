@@ -1,23 +1,21 @@
-﻿@model IEnumerable<Sparkle.Models.UserProfileViewModel>
+﻿@model UserProfileViewModel
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+<div class="edit-content">
+
+    <form class="edit-form" method="post" asp-action="Edit" asp-controller="Home">
+        <input type="hidden" asp-for="User.Id" value="@Model.User.Id" />
+        <input type="hidden" asp-for="User.PostIds" value="@Model.User.PostIds.ToString()" />
+        <input type="hidden" asp-for="User.UserName" value="@Model.User.UserName" />
+        <input type="hidden" asp-for="User.Password" value="@Model.User.Password" />
+        <input type="hidden" asp-for="User.Status" value="@Model.User.Status" />
+        <input type="text" asp-for="User.Name" />
+        <input type="text" asp-for="User.Surname" />
+        <input type="date" asp-for="User.DateOfBirth" />
+        <input type="email" asp-for="User.Email" />
+    
+        
+        <input class="edit-form__save" type="submit" asp-action="Edit" value="Save changes" asp-controller="Home" />
+    </form>
+</div>

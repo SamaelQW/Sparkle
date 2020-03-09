@@ -74,11 +74,15 @@ namespace Sparkle.Domain.Entities
         [BsonElement("userStatus")]
         public EUserStatus Status { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
-        {
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            return userIdentity;
-        }
+
+        /// <summary>
+        /// The user's friends
+        /// </summary>
+        [BsonElement("friends")]
+        public IEnumerable<Friend> Friends { get; set; }
+
+
+
 
     }
 }

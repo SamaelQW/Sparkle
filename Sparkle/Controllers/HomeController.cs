@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Sparkle.Domain.Entities;
 using Sparkle.Domain.Services;
 using Sparkle.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,22 +103,24 @@ namespace Sparkle.Controllers
             return View(GetUser());
         }
 
+
+        
         [HttpPost]
         [Route("/Edit")]
-        public async Task<IActionResult> Edit(UserProfileViewModel user)
+        public async Task<IActionResult> Edit(UserProfileViewModel editUser)
         {
             User newUser = new User()
             {
-                Age = user.User.Age,
-                DateOfBirth = user.User.DateOfBirth,
-                Email = user.User.Email,
-                Name = user.User.Name,
-                Password = user.User.Password,
-                PostIds = user.User.PostIds,
-                Status = user.User.Status,
-                Surname = user.User.Surname,
-                UserName = user.User.UserName,
-                Id = user.User.Id,
+                Age = DateTime.Now.Year - editUser.User.DateOfBirth.Year,
+                DateOfBirth = editUser.User.DateOfBirth,
+                Email = editUser.User.Email,
+                Name = editUser.User.Name,
+                Password = editUser.User.Password,
+                PostIds = GetUser().User.PostIds,
+                Status = editUser.User.Status,
+                Surname = editUser.User.Surname,
+                UserName = editUser.User.UserName,
+                Id = editUser.User.Id,
             };
 
             await _userService.UpdateAsync(newUser);
@@ -131,7 +134,8 @@ namespace Sparkle.Controllers
         #region Helper Methods
 
 
-        [Route("Home/LikePressed/{postId}")]
+        [HttpGet]
+        [Route("Home/LikePressed")]
         public async Task<EmptyResult> LikePressed(string postId)
         {
             await _likeService.LikeAsync(postId, User.Identity.Name);

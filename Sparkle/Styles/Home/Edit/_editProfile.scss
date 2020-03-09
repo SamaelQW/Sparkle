@@ -1,0 +1,29 @@
+﻿@import "../../Data/variables";
+@import "../../Data/mixins";
+
+
+.edit-content {
+    border-radius: inherit;
+    background-color: #22c72c;
+
+    .edit-form {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        font-family: 'Comic Sans MS';
+
+        input{
+            outline:none;
+            min-width: 300px;
+            max-width:300px;
+            margin: 0 auto;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            border:none;
+            border-radius: 15px 15px;
+            padding-left: 5px;
+            height: 25px;
+            
+        }
+    }
+}

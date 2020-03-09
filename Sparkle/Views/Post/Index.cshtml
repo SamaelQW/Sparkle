@@ -5,6 +5,8 @@
 }
     <div class="post-content">
 
+        <div class="postId" style="display:none">@Model.Post.Id</div>
+
         <div class="post-content__title">@Model.Post.Title</div>
         
         @if(Model.User.UserName == Model.Post.OwnerUserName)
@@ -39,7 +41,7 @@
 
 
         <div class="add-comment-area">
-            <form method="post" asp-action="Index" asp-controller="Post" >
+            <form>
 
                 <input type="hidden" name="PostId" value="@Model.Post.Id" />
                 <input type="hidden" name="OwnerName" value="@Model.User.Name" />
@@ -48,7 +50,7 @@
                 
 
                 <textarea name="Body" placeholder="Comment"></textarea>
-                <input type="submit" value="Send" asp-action="Index" asp-controller="Post" onclick="renderNewComment()" />
+                <input type="button" value="Send" onclick="renderNewComment()" />
             </form>
         </div>
     </div>

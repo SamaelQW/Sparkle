@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Sparkle.Domain.Entities;
 using Sparkle.Domain.Services;
 using Sparkle.Models;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sparkle.Controllers
@@ -15,7 +17,6 @@ namespace Sparkle.Controllers
         private readonly PostService _postService;
         private readonly UserService _userService;
         private readonly CommentService _commentService;
-        private Comment lastComment;
         #endregion
 
         public PostController(PostService postService, UserService userService, CommentService commentService)
@@ -39,29 +40,23 @@ namespace Sparkle.Controllers
         }
 
         [HttpPost]
-        [Route("Post/{postId}")]
-        public async Task<IActionResult> Index(string postId, AddCommentViewModel model)
+        [Route("/AddComment")]
+        public async Task<PartialViewResult> AddComment(string postId, AddCommentViewModel model)
         {
             var comment = new Comment()
             {
                 Body = model.Body,
-                CreatedDate = model.Created,
+                CreatedDate = DateTime.Now,
                 OwnerName = model.OwnerName,
                 OwnerSurname = model.OwnerSurname,
                 OwnerUserName = model.OwnerUserName
             };
             await _commentService.AddCommentAsync(postId, comment);
-            lastComment = comment;
-            return RedirectToAction("Index", "Post", model.PostId);
+            return PartialView("NewComment", comment);
         }
 
 
         #region Helper Methods
-
-        public PartialViewResult NewComment()
-        {
-            return PartialView(lastComment);
-        }
 
         [HttpPost]
         [Route("Post/RemovePost/{postId}")]

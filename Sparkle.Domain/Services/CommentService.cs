@@ -24,5 +24,12 @@ namespace Sparkle.Domain.Services
 
             await _postService.UpdateAsync(post.Id, post);
         }
+
+        public async Task<IEnumerable<Comment>> GetCommentsByPost(string postId)
+        {
+            var post = await _postService.GetAsync(postId);
+            return post.Comments;
+        }
+
     }
 }

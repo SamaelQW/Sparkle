@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using Sparkle.Domain.Data;
 using Sparkle.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sparkle.Domain.Services
@@ -12,7 +13,7 @@ namespace Sparkle.Domain.Services
 
         #region Private Members
         private readonly IMongoCollection<Post> _posts;
-
+        private readonly UserService _userService;
         #endregion
 
 
@@ -26,6 +27,7 @@ namespace Sparkle.Domain.Services
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _posts = database.GetCollection<Post>(settings.PostsCollectionName);
+            _userService = new UserService(settings);
         }
         #endregion
 
@@ -34,6 +36,22 @@ namespace Sparkle.Domain.Services
 
         private string pattern = "{}";
         #region Async Methods
+
+        public async Task<IEnumerable<Post>> GetFriendsPostsAsync(User user)
+        {
+            var posts = await GetAsync();
+            if (user.Friends == null)
+            {
+                user.Friends = new List<Friend>();
+            }
+            var names = user.Friends.Select(u => u.Username);
+            var friendsPosts = posts.Where(p => names.Contains(p.OwnerUserName) || p.OwnerUserName == user.UserName);
+
+            return friendsPosts;
+        }
+
+
+
 
         /// <summary>
         /// Get all posts from DataBase

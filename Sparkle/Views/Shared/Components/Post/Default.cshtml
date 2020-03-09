@@ -1,48 +1,73 @@
 ﻿@model  IEnumerable<Post>
-
 @{
     foreach (var post in Model)
     {
-   
+
     <div class="post">
-        
+
         <h3 class="post__title">
             <a asp-action="Index" asp-controller="Post" asp-route-postId="@post.Id">@post.Title</a>
         </h3>
         <div class="post__body">@post.Body</div>
         <div class="post__created-time">@post.CreatedDate.ToString("dd/MM/yyyy HH:mm")</div>
-        @if (post.Likes == null || post.Likes.Count == 0)
-        {
-            <div class="post__like" onclick="likePressed('@post.Id')">&hearts; 0</div>
-        }
-        else
-        {
-            <div class="post__like" onclick="likePressed('@post.Id')"> 
-                @if(post.Likes.Any(l=>l.OwnerUsername==User.Identity.Name) )
+        <form>
+            <input type="hidden" name="id" value="@post.Id" />
+            @if (post.Likes == null || post.Likes.Count == 0)
+            {
+                <button type="button" class="post__like">
+                    <span>&hearts;</span> <span class="counter">0</span>
+                </button>
+            }
+            else
+            {
+
+                @if (post.Likes.Any(l => l.OwnerUsername == User.Identity.Name))
                 {
-                <span class="liked">&hearts;</span> 
+                    <button type="button" class="post__like liked">
+                        <span>&hearts;</span>
+
+                        <span class="counter">
+                            @post.Likes.Count
+                        </span>
+                    </button>
                 }
                 else
                 {
-                    <span>&hearts;</span>
+                    <button type="button" class="post__like">
+                        <span>&hearts;</span>
+
+                        <span class="counter">
+                            @post.Likes.Count
+                        </span>
+                    </button>
                 }
 
-                <span class="counter">
-                    @post.Likes.Count
-                </span>
-                </div>
-        }
-        @if(post.Comments == null || post.Comments.Count == 0)
+
+            }
+        </form>
+        @if (post.Comments == null || post.Comments.Count == 0)
         {
-            <div class="post__comment"><img src="https://img.icons8.com/ios/50/000000/comments.png"> 0</div>
+            <button class="post__comment"><img src="https://img.icons8.com/ios/50/000000/comments.png"> 0</button>
         }
         else
         {
-            <div class="post__comment"><img src="https://img.icons8.com/ios/50/000000/comments.png"> @post.Comments.Count</div>
+            <button class="post__comment"><img src="https://img.icons8.com/ios/50/000000/comments.png"> @post.Comments.Count</button>
         }
-    </div>
-    
-    }
-    
-}
 
+        @if (post.Comments != null && post.Comments.Count != 0)
+        {
+            <div class="separator"></div>
+            <div class="mini-comment-container">
+                @for (int i = 0; i < post.Comments.Count && i < 2; i++)
+                {
+                    @await Component.InvokeAsync("MiniComment", post.Comments.OrderByDescending(x => x.CreatedDate).ToList()[i]);
+                }
+            </div>
+        }
+
+
+    </div>
+
+        }
+
+    }

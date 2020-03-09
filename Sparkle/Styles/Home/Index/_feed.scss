@@ -1,9 +1,11 @@
 ﻿@import "../../Data/_mixins";
 
-.feed-container{
-    display:flex;
+.feed-container {
+    display: flex;
     flex-direction: row-reverse;
     flex: auto;
+    background-color: #3a3239;
+    border-radius: inherit;
 }
 
 .add-btn {

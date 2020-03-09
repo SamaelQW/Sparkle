@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Sparkle</title>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/style.css" type="text/css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" asp-append-version="true" />
 </head>
 <body>
     <div class="container">
@@ -15,8 +15,10 @@
                 <a asp-controller="Home" asp-action="Index"><img class="logo__img" src="~/img/logo.png" /></a>
             </div>
             <div class="header__search search">
-                <input type="text" class="search__box search_border_none" />
-                <input type="button" class="search__button search_border_none" value="Search" />
+                <form>
+                    <input type="text" name="searchText" class="search__box search_border_none" />
+                    <input type="button" id="search-btn" class="search__button search_border_none" value="Search" />
+                </form>
             </div>
 
             @if (User.Identity.IsAuthenticated)
@@ -30,6 +32,7 @@
         <nav class="nav">
             <a asp-action="Profile" asp-controller="Home" class="nav__link">My page</a>
             <a asp-action="Index" asp-controller="Home" class="nav__link">News</a>
+            <a asp-action="Friends" asp-controller="Friend" class="nav__link">Friends</a>
         </nav>
         <div class="content">
             @RenderBody()
@@ -39,9 +42,9 @@
         </footer>
     </div>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

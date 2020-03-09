@@ -2,6 +2,8 @@
 using Sparkle.Domain.Data;
 using Sparkle.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Sparkle.Domain.Services
@@ -29,6 +31,12 @@ namespace Sparkle.Domain.Services
         }
 
         #region Public Methods
+
+        public Task<User> GetAsync(ClaimsPrincipal user)
+        {
+            return GetByUserNameAsync(user.Identity.Name);
+        }
+
 
         #region Sync
         /// <summary>
@@ -91,6 +99,20 @@ namespace Sparkle.Domain.Services
         {
             _users.ReplaceOne(u => u.Id == user.Id, user);
         }
+
+        /// <summary>
+        /// Get <see cref="User"/> with <paramref name="username"/> friends
+        /// </summary>
+        /// <param name="username"><see cref="User"/> username to get friends</param>
+        /// <returns>User's friends</returns>
+        public IEnumerable<Friend> GetFriends(string username)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.UserName, username);
+            var f = _users.Find(filter).Project(u => u.Friends.Select(f => f));
+            return f.First().ToList();
+        }
+
+
         #endregion
         #region Async
 
@@ -130,7 +152,8 @@ namespace Sparkle.Domain.Services
         /// <returns></returns>
         public Task<User> GetAsync(string id)
         {
-            return _users.FindAsync($"_id: {id}").Result.FirstOrDefaultAsync();
+            var filter = Builders<User>.Filter.Eq(u => u.Id, id);
+            return _users.FindAsync(filter).Result.FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -154,6 +177,20 @@ namespace Sparkle.Domain.Services
         {
             return _users.ReplaceOneAsync(u => u.Id == user.Id, user);
         }
+
+        /// <summary>
+        /// Get <see cref="User"/> with <paramref name="username"/> friends
+        /// </summary>
+        /// <param name="username"><see cref="User"/> username to get friends</param>
+        /// <returns>User's friends</returns>
+        public Task<IEnumerable<Friend>> GetFriendsAsync(string username)
+        {
+            var filter = Builders<User>.Filter.Eq("username", username);
+            var projection = Builders<User>.Projection.Expression(u => u.Friends.Select(f => f));
+            var options = new FindOptions<User, IEnumerable<Friend>>() { Projection = projection };
+            return _users.FindAsync(filter, options).Result.FirstOrDefaultAsync();
+        }
+
         #endregion
         #endregion
 
