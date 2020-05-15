@@ -31,10 +31,8 @@ namespace Sparkle
                 options.ViewLocationFormats.Add("/{0}.cshtml");
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
-
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -43,7 +41,6 @@ namespace Sparkle
                 });
 
             services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
-
 
             /// My configuration
             services.Configure<SparkleDatabaseSettings>(
@@ -79,18 +76,11 @@ namespace Sparkle
             app.UseAuthorization();
             app.UseAuthentication();
 
-
-
-
             app.UseEndpoints(endpoints =>
             {
-
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
             });
         }
     }

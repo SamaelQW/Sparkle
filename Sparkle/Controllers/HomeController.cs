@@ -84,12 +84,10 @@ namespace Sparkle.Controllers
         [Route("/Profile")]
         public IActionResult Profile()
         {
-
             if (user == null)
             {
                 user = GetUser();
             }
-
             return View(user);
         }
 
@@ -146,7 +144,6 @@ namespace Sparkle.Controllers
 
         #endregion
 
-
         #region Private Members
 
         private async void UpdatePosts()
@@ -180,6 +177,5 @@ namespace Sparkle.Controllers
             };
         }
         #endregion
-
     }
 }

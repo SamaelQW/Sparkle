@@ -6,8 +6,7 @@ namespace Sparkle.Models
     public class UserProfileViewModel
     {
         public User User { get; set; }
-        public IEnumerable<Post> Posts { get; set; }
 
-
+        public IEnumerable<Domain.Entities.Post> Posts { get; set; }
     }
 }

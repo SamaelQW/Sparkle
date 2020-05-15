@@ -35,9 +35,6 @@
                 }
             }
         </div>
-
-
-
         <div class="add-comment-area">
             <form>
 
@@ -45,8 +42,6 @@
                 <input type="hidden" name="OwnerName" value="@Model.User.Name" />
                 <input type="hidden" name="OwnerSurname" value="@Model.User.Surname" />
                 <input type="hidden" name="OwnerUserName" value="@Model.User.UserName" />
-                
-
                 <textarea name="Body" placeholder="Comment"></textarea>
                 <input type="button" value="Send" onclick="renderNewComment()" />
             </form>

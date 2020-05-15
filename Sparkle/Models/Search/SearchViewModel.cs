@@ -6,8 +6,9 @@ namespace Sparkle.Models
     public class SearchViewModel
     {
         public IEnumerable<User> SearchedUsers { get; set; }
-        public IEnumerable<Post> Posts { get; set; }
-        public User User { get; set; }
 
+        public IEnumerable<Domain.Entities.Post> Posts { get; set; }
+
+        public User User { get; set; }
     }
 }

@@ -6,6 +6,6 @@
         <a class="page-link add-link" asp-controller="Home" asp-action="AddPost">Add Post</a>
     </div>
     <div class="posts">
-        @await Component.InvokeAsync("Post", User, "friends");
+        @{await Html.RenderPartialAsync("Post", new PostRenderViewModel { User = User, TypeOfRender = GlobalConstants.PostViewConstants.FriendPosts });};
     </div>
 </div>

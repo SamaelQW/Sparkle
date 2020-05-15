@@ -1,6 +1,6 @@
 ﻿@model  UserProfileViewModel
 @{
-    ViewData["Title"] = Model.User.Name + ' '+ Model.User.Surname;
+    ViewData["Title"] = Model.User.Name + ' ' + Model.User.Surname;
 }
 
 <div class="profile-content">
@@ -24,7 +24,7 @@
     
 
     <div class="profile-content__user-posts user-posts">
-        @await Html.RenderPartialAsync("Post")
+        @{await Html.RenderPartialAsync("Post")}
     </div>
 </div>
 
