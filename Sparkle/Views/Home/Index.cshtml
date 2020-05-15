@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Posts";
 }
 <div class="feed-container">
@@ -7,6 +6,6 @@
         <a class="page-link add-link" asp-controller="Home" asp-action="AddPost">Add Post</a>
     </div>
     <div class="posts">
-        @await Component.InvokeAsync("Post")
+        @{await Html.RenderPartialAsync("Post", new PostRenderViewModel { User = User, TypeOfRender = GlobalConstants.PostViewConstants.FriendPosts });};
     </div>
 </div>

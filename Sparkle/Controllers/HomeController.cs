@@ -69,6 +69,8 @@ namespace Sparkle.Controllers
         [Route("/AddPost")]
         public IActionResult AddPost(Post post)
         {
+            var user = GetUser().User;
+            post.CreatedBy = $"{user.Name} {user.Surname}";
             _postService.Create(post);
             return RedirectToAction("Index");
         }
@@ -82,12 +84,10 @@ namespace Sparkle.Controllers
         [Route("/Profile")]
         public IActionResult Profile()
         {
-
             if (user == null)
             {
                 user = GetUser();
             }
-
             return View(user);
         }
 
@@ -104,7 +104,7 @@ namespace Sparkle.Controllers
         }
 
 
-        
+
         [HttpPost]
         [Route("/Edit")]
         public async Task<IActionResult> Edit(UserProfileViewModel editUser)
@@ -144,7 +144,6 @@ namespace Sparkle.Controllers
 
         #endregion
 
-
         #region Private Members
 
         private async void UpdatePosts()
@@ -178,6 +177,5 @@ namespace Sparkle.Controllers
             };
         }
         #endregion
-
     }
 }

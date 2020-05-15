@@ -3,10 +3,12 @@ using System.Collections.Generic;
 
 namespace Sparkle.Models
 {
-    public class UserProfileViewModel
+    public class SearchViewModel
     {
-        public User User { get; set; }
+        public IEnumerable<User> SearchedUsers { get; set; }
 
         public IEnumerable<Domain.Entities.Post> Posts { get; set; }
+
+        public User User { get; set; }
     }
 }

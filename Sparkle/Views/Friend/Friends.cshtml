@@ -4,21 +4,16 @@
     
     @foreach (var friend in Model.Friends)
     {
-        <div class="friend">
-            <div class="friend__foto">
+        <div class="user-row">
+            <div class="user-row__picture">
                 Photo
             </div>
-
-            <div class="friend__full-name">
-                <a asp-action="Profile" asp-controller="Friend" asp-route-userId="@friend.Id">
+            <div class="user-row__fullname">
+                <a  class="user-row__link" asp-action="Profile" asp-controller="Friend" asp-route-userName="@friend.Username">
                 @friend.Name @friend.Surname
                 </a>
             </div>
-
-
-
         </div>
     }
-
 </div>
 

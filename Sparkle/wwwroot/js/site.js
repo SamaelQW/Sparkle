@@ -6,7 +6,7 @@
 $('.post__like').click(function () {
     var form = $(this).closest('form');
     var id = $(form).find('input[name="id"]').val();
-    $.get('Home/LikePressed', { postId: id }).done(function (res) {
+    $.get('/Home/LikePressed', { postId: id }).done(function (res) {
         var span = $(form).find('.counter');
         var btn = $(form).find('.post__like');
         $(btn).toggleClass('liked');
@@ -45,11 +45,24 @@ function renderNewComment() {
     
 };
 
-    
-
-
-
 function removePost(postId) {
     $.post(`RemovePost/${postId}`);
     window.location.href = "/Index" ;
 }
+
+$(".add-friend").click(function () {
+
+    var form = $(this).closest("form");
+
+    function afterAddFriend() {
+        $(form).css('display', 'none');
+        var parent = $(form).parent();
+        console.log(parent);
+        parent.html('<div class="friend-status__friend">In friend</div>');
+    };
+
+
+    var id = form.find("input[name='Id']").val();
+
+    $.get('/AddFriend', { Id: id }, afterAddFriend);
+});

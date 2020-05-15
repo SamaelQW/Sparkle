@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Sparkle</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" type="text/css" asp-append-version="true" />
 </head>
@@ -15,9 +14,9 @@
                 <a asp-controller="Home" asp-action="Index"><img class="logo__img" src="~/img/logo.png" /></a>
             </div>
             <div class="header__search search">
-                <form>
-                    <input type="text" name="searchText" class="search__box search_border_none" />
-                    <input type="button" id="search-btn" class="search__button search_border_none" value="Search" />
+                <form asp-action="Search" asp-controller="Search">
+                    <input type="text" name="searchString" class="search__box search_border_none" />
+                    <input type="submit" id="search-btn" class="search__button search_border_none"  value="Search" />
                 </form>
             </div>
 

@@ -13,10 +13,7 @@ namespace Sparkle.Controllers
         #region Private Members
         private readonly UserService _userService;
         private readonly PostService _postService;
-
-
-
-
+        private readonly FriendService _friendService;
         #endregion
         #region Constructor
 
@@ -24,7 +21,7 @@ namespace Sparkle.Controllers
         {
             _userService = userService;
             _postService = postService;
-
+            _friendService = new FriendService(_userService);
         }
 
         #endregion
@@ -46,12 +43,12 @@ namespace Sparkle.Controllers
         }
 
         [HttpGet]
-        [Route("/Profile/{userId}")]
-        public async Task<IActionResult> Profile(string userId)
+        [Route("/Profile/{userName}")]
+        public async Task<IActionResult> Profile(string userName)
         {
             var model = new UserProfileViewModel
             {
-                User = await _userService.GetAsync(userId),
+                User = await _userService.GetByUserNameAsync(userName),
             };
             model.Posts = (await _postService.GetAsync()).Where(p => p.OwnerUserName == model.User.UserName);
             return View(model);
@@ -60,6 +57,13 @@ namespace Sparkle.Controllers
         #endregion
 
         #region Helper Methods
+
+        [HttpGet]
+        [Route("/AddFriend")]
+        public async Task AddFriend(string Id)
+        {
+            await _friendService.AddAsync(User, Id);
+        }
 
         #endregion
 

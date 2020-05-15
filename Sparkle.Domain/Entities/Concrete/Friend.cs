@@ -1,17 +1,20 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Sparkle.Domain.Entities
 {
     public class Friend
     {
-        
         [BsonElement("friendId")]
-        public string Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string FriendId { get; set; }
+        
         /// <summary>
         /// The friend's name
         /// </summary>
         [BsonElement("friendName")]
         public string Name { get; set; }
+        
         /// <summary>
         /// The friend's surname
         /// </summary>
@@ -23,6 +26,5 @@ namespace Sparkle.Domain.Entities
         /// </summary>
         [BsonElement("friendUsername")]
         public string Username { get; set; }
-
     }
 }

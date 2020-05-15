@@ -77,7 +77,7 @@ namespace Sparkle.Tests
             FriendService friendService = new FriendService(userService);
             var friend = new Friend()
             {
-                Id = userService.GetByUserName("sofa").Id,
+                FriendId = userService.GetByUserName("sofa").Id,
                 Name = userService.GetByUserName("sofa").Name,
                 Surname = userService.GetByUserName("sofa").Surname,
                 Username = "sofa",

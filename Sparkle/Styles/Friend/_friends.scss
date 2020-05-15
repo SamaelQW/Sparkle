@@ -1,24 +1,6 @@
 ﻿.friend-content {
-    border-radius:inherit;
-
-    display:flex;
-    flex-direction:column;
-    background-color: #303a92;
-
-    .friend{
-        display:inherit;
-        flex-direction:row;
-        &__foto{
-            width:100px;
-            height: 100px;
-            border: 1px solid;
-            border-radius: 50%;
-            
-
-        }
-
-        &__full-name{
-
-        }
-    }
+    border-radius: inherit;
+    display: flex;
+    flex-direction: column;
+    background-color: #d24646;
 }
