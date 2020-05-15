@@ -24,7 +24,7 @@
     
 
     <div class="profile-content__user-posts user-posts">
-        @await Component.InvokeAsync("Post", Model.User.UserName)
+        @await Html.RenderPartialAsync("Post")
     </div>
 </div>
 

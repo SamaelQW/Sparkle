@@ -11,7 +11,7 @@ namespace Sparkle.Domain.Entities
     /// <summary>
     /// Entity which represent User
     /// </summary>
-    public class User : IEntity, IUser<string>
+    public class User : IEntity
     {
         /// <summary>
         /// The user id in DataBase
@@ -60,12 +60,14 @@ namespace Sparkle.Domain.Entities
         /// <summary>
         /// The user's date of births 
         /// </summary>
+        [BsonElement("dateOfBirth")]
+        [BsonDateTimeOptions(DateOnly = true)]
         public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// User's posts IDs 
         /// </summary>
-        [BsonElement("usersPosts")]
+        [BsonElement("userPosts")]
         public IEnumerable<string> PostIds { get; set; }
 
         /// <summary>

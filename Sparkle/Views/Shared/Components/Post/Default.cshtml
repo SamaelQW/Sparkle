@@ -6,9 +6,11 @@
     <div class="post">
 
         <h3 class="post__title">
-            <a asp-action="Index" asp-controller="Post" asp-route-postId="@post.Id">@post.Title</a>
+            <a asp-action="Profile" asp-controller="Friend" asp-route-userName="@post.OwnerUserName">@post.CreatedBy</a>
         </h3>
-        <div class="post__body">@post.Body</div>
+        <a asp-action="Index" asp-controller="Post" asp-route-postId="@post.Id">
+            <div class="post__body">@post.Body</div>
+        </a>
         <div class="post__created-time">@post.CreatedDate.ToString("dd/MM/yyyy HH:mm")</div>
         <form>
             <input type="hidden" name="id" value="@post.Id" />

@@ -1,21 +1,19 @@
 ﻿@model PostViewModel
 
 @{
-    ViewData["Title"] = Model.Post.Title;
+    ViewData["Title"] = $"{Model.Post.CreatedBy} - Post";
 }
     <div class="post-content">
 
         <div class="postId" style="display:none">@Model.Post.Id</div>
 
-        <div class="post-content__title">@Model.Post.Title</div>
+        <div class="post-content__title">@Model.Post.CreatedBy</div>
         
         @if(Model.User.UserName == Model.Post.OwnerUserName)
         {
             <div class="post__remove-btn" onclick="removePost('@Model.Post.Id')"><img alt="Remove post" src="https://img.icons8.com/ios/50/000000/delete-sign.png"></div>
         }
 
-
-        <div class="post-content__category">@Model.Post.Category</div>
         <div class="post-content__date">@Model.Post.CreatedDate.ToString("dd/MM/yyyy HH:mm")</div>
         <div class="separator"></div>
         <div class="post-content__body">

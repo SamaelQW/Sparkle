@@ -1,5 +1,6 @@
 ﻿using Sparkle.Domain.Entities;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Sparkle.Domain.Services
@@ -7,10 +8,10 @@ namespace Sparkle.Domain.Services
     public class FriendService
     {
         #region Private Members
+
         private readonly UserService _userService;
 
         #endregion
-
 
         #region Constructor
 
@@ -59,9 +60,9 @@ namespace Sparkle.Domain.Services
 
         #region Async
         /// <summary>
-        /// Add <paramref name="friend"/> to <paramref name="user"/>
+        /// Add a new <paramref name="friend"/> to <paramref name="user"/>
         /// </summary>
-        /// <param name="user">User</param>
+        /// <param name="user">User which will be contain new <paramref name="friend"/></param>
         /// <param name="friend">Friend</param>
         public Task AddAsync(User user, Friend friend)
         {
@@ -73,7 +74,6 @@ namespace Sparkle.Domain.Services
 
             return _userService.UpdateAsync(user);
         }
-
 
         /// <summary>
         /// Remove <paramref name="friend"/> from <paramref name="user"/>
@@ -90,8 +90,28 @@ namespace Sparkle.Domain.Services
             return _userService.UpdateAsync(user);
         }
 
-        #endregion
-        #endregion
+        /// <summary>
+        /// Add a new friend with <paramref name="newFriendId"/> to <paramref name="user"/>
+        /// </summary>
+        /// <param name="user">The user</param>
+        /// <param name="newFriendId">New friend <see cref="User.Id"/></param>
+        /// <returns></returns>
+        public async Task AddAsync(ClaimsPrincipal user, string newFriendId)
+        {
+            User friendUser = await _userService.GetAsync(newFriendId);
+            var currentUser = await _userService.GetAsync(user);
+            var friend = new Friend()
+            {
+                FriendId = newFriendId,
+                Name = friendUser.Name,
+                Surname = friendUser.Surname,
+                Username = friendUser.UserName
+            };
 
+            await AddAsync(currentUser, friend);
+            return;
+        }
+        #endregion
+        #endregion
     }
 }

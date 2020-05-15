@@ -1,12 +1,17 @@
 ﻿@import "../Data/_variables";
 
 .footer {
-    border: 1px solid black;
     max-width: $main-width;
-    width: 100%;
     height: 50px;
     margin-bottom: 5px;
     //---------------
     grid-column: 2;
     grid-row: 3;
+    border-radius: 10px 10px;
+    background-color: #513d68;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(180deg, #6adee7 0%, #ffa7f8 100%);
 }

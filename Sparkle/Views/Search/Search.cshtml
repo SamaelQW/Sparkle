@@ -1,0 +1,37 @@
+﻿@model SearchViewModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+<div class="seach-content">
+    @foreach (var user in Model.SearchedUsers)
+    {
+        <div class="seach-content__user-row user-row">
+            <div class="user-row__picture">
+                Photo
+            </div>
+            <div class="user-row__fullname">
+                <a class="user-row__link" asp-action="Profile" asp-controller="Friend" asp-route-userName="@user.UserName">
+                    @user.Name @user.Surname
+                </a>
+            </div>
+            <div class="user-row__friend-status friend-status">
+                @if (Model.User.Friends != null && Model.User.Friends.Select(f => f.Username).Contains(user.UserName))
+                {
+                    <div class="friend-status__friend">
+                        In friend
+                    </div>
+                }
+                else
+                {
+                    <form>
+                        <input type="hidden" name="Id" value="@user.Id" />
+                        <input type="button" class="friend-status__add-friend add-friend" value="Add to friend"/>
+                    </form>
+                }
+            </div>
+        </div>
+    }
+</div>
+

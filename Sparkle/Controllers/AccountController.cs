@@ -7,7 +7,6 @@ using Sparkle.Domain.Services;
 using Sparkle.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -75,7 +74,6 @@ namespace Sparkle.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            Debug.WriteLine($"Logout method: is auth {User.Identity.IsAuthenticated}");
             return RedirectToAction("Login", "Account");
         }
 

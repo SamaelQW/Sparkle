@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparkle", "Sparkle\Sparkle.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparkle.Domain", "Sparkle.Domain\Sparkle.Domain.csproj", "{029B2AF3-963E-4A2B-8DCD-F8032C86C5C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparkle.Tests", "Sparkle.Tests\Sparkle.Tests.csproj", "{454DBEE2-B399-43DF-9F93-F85C52D433C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparkle.Tests", "Sparkle.Tests\Sparkle.Tests.csproj", "{454DBEE2-B399-43DF-9F93-F85C52D433C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

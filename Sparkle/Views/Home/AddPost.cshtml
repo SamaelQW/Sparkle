@@ -10,10 +10,7 @@
         <input type="hidden" name="Id"/>
         <input type="hidden" name="CreatedDate" value="" />
         <input type="hidden" name="OwnerUserName" value="@User.Identity.Name" />
-        <input type="text" name="Title" placeholder="Title" />
         <textarea name="Body" placeholder="New post"></textarea>
-        <input type="text" name="Category" placeholder="Category"/>
-
 
         <input type="submit" asp-action="AddPost" asp-controller="Home" value="Create" />
     </form>

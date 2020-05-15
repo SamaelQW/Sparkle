@@ -19,23 +19,16 @@ namespace Sparkle.Domain.Entities
         public string Id { get; set; }
 
         /// <summary>
-        /// The post's title
+        /// The post created by 
         /// </summary>
-        [BsonElement("title")]
-        public string Title { get; set; }
+        [BsonElement("createdBy")]
+        public string CreatedBy { get; set; }
 
         /// <summary>
         /// The post's body
         /// </summary>
         [BsonElement("body")]
         public string Body { get; set; }
-
-
-        /// <summary>
-        /// The post's category
-        /// </summary>
-        [BsonElement("category")]
-        public string Category { get; set; }
 
         /// <summary>
         /// The post's created date

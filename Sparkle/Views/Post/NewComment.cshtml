@@ -2,7 +2,7 @@
 
     <div class="comment">
         <div class="comment__owner">
-            <a href="#"> @Model.OwnerName @Model.OwnerSurname </a>
+            <a asp-action="Profile" asp-controller="Friend" asp-route-userName="@Model.OwnerUserName"> @Model.OwnerName @Model.OwnerSurname </a>
         </div>
         <div class="comment__body">
             @Model.Body

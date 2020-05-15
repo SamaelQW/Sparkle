@@ -69,6 +69,8 @@ namespace Sparkle.Controllers
         [Route("/AddPost")]
         public IActionResult AddPost(Post post)
         {
+            var user = GetUser().User;
+            post.CreatedBy = $"{user.Name} {user.Surname}";
             _postService.Create(post);
             return RedirectToAction("Index");
         }
@@ -104,7 +106,7 @@ namespace Sparkle.Controllers
         }
 
 
-        
+
         [HttpPost]
         [Route("/Edit")]
         public async Task<IActionResult> Edit(UserProfileViewModel editUser)
