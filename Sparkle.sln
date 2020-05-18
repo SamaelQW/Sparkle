@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparkle.Domain", "Sparkle.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparkle.Tests", "Sparkle.Tests\Sparkle.Tests.csproj", "{454DBEE2-B399-43DF-9F93-F85C52D433C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparkle.Neo4j.Domain", "Sparkle.Neo4j.Domain\Sparkle.Neo4j.Domain.csproj", "{EA5912C7-3A38-4CEE-967B-722C15AD117F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{454DBEE2-B399-43DF-9F93-F85C52D433C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{454DBEE2-B399-43DF-9F93-F85C52D433C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{454DBEE2-B399-43DF-9F93-F85C52D433C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA5912C7-3A38-4CEE-967B-722C15AD117F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA5912C7-3A38-4CEE-967B-722C15AD117F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA5912C7-3A38-4CEE-967B-722C15AD117F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA5912C7-3A38-4CEE-967B-722C15AD117F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
