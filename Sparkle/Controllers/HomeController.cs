@@ -43,9 +43,10 @@ namespace Sparkle.Controllers
         [HttpGet]
         [Route("/")]
         [Route("/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var posts =await _postService.GetFriendsPostsAsync(GetUser().User);
+            return View(posts);
         }
 
 

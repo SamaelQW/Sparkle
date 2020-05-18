@@ -22,6 +22,6 @@
     <!---->
    
     <div class="profile-content__user-posts user-posts">
-        @{ await Html.RenderPartialAsync("Post"); }
+        @{ await Html.RenderPartialAsync("Post", Model.Posts); }
     </div>
 </div>

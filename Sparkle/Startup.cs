@@ -7,8 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Neo4jClient;
 using Sparkle.Domain.Data;
 using Sparkle.Domain.Services;
+using Sparkle.Neo4j.Domain.Data;
+using Sparkle.Neo4j.Domain.Services;
 using System.Security.Principal;
 
 namespace Sparkle
@@ -49,10 +52,17 @@ namespace Sparkle
             services.AddTransient<ISparkleDatabaseSettings, SparkleDatabaseSettings>(
                 sp => sp.GetRequiredService<IOptions<SparkleDatabaseSettings>>().Value);
 
+            services.Configure<GraphSettings>(
+                Configuration.GetSection(nameof(GraphSettings)));
+            services.AddTransient<IGraphSettings, GraphSettings>(
+                sp => sp.GetRequiredService<IOptions<GraphSettings>>().Value);
+
             services.AddTransient<PostService>();
             services.AddTransient<UserService>();
             services.AddTransient<LikeService>();
             services.AddTransient<CommentService>();
+            services.AddTransient<Neo4j.Domain.Factory.GraphClientFactory>();
+            services.AddTransient<GraphUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

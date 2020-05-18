@@ -1,0 +1,16 @@
+//Neo4J db
+match(n) detach delete n;
+
+Create (u:User {login: "petro"});
+Create (u:User {login: "sofa"});
+Create (u:User {login: "olya"});
+Create (u:User {login: "admin"});
+Create (u:User {login: "ivan"});
+Create (u:User {login: "marta"});
+Match (u:User {login: "admin"}), (f:User {login: "sofa"}) Create (u)-[r:In_Friend]->(f);
+Match (u:User {login: "admin"}), (f:User {login: "ivan"}) Create (u)-[r:In_Friend]->(f);
+Match (u:User {login: "ivan"}), (f:User {login: "sofa"}) Create (u)-[r:In_Friend]->(f);
+Match (u:User {login: "ivan"}), (f:User {login: "marta"}) Create (u)-[r:In_Friend]->(f);
+Match (u:User {login: "sofa"}), (f:User {login: "admin"}) Create (u)-[r:In_Friend]->(f);
+Match (u:User {login: "marta"}), (f:User {login: "olya"}) Create (u)-[r:In_Friend]->(f);
+Match (u:User {login: "olya"}), (f:User {login: "marta"}) Create (u)-[r:In_Friend]->(f);

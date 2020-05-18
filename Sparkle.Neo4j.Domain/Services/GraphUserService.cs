@@ -1,9 +1,10 @@
 ﻿using Neo4jClient;
+using Sparkle.Domain.Core;
 using Sparkle.Domain.Entities;
 using Sparkle.Neo4j.Domain.Entities;
 using System.Linq;
 
-namespace Sparkle.Neo4j.Domain.Repository
+namespace Sparkle.Neo4j.Domain.Services
 {
     public class GraphUserService
     {
@@ -13,15 +14,6 @@ namespace Sparkle.Neo4j.Domain.Repository
         {
             _client = factory.GetClient();
             _client.Connect();
-            var count = _client.Cypher
-                .Match("(n)")
-                .Return<int>("count(n)").Results
-                .FirstOrDefault();
-            if (count == 0)
-            {
-                _client.Cypher
-                    .CreateUniqueConstraint("n:User", "n.UserName");
-            }
         }
 
         #region Create
@@ -38,7 +30,7 @@ namespace Sparkle.Neo4j.Domain.Repository
                 .ExecuteWithoutResults();
         }
 
-        public void CreateFriendsRelations(User user, User friend)
+        public void CreateRelation(User user, User friend, string relation = GlobalConstants.FriendRelation)
         {
             var userInDb = Get(user.UserName);
             if (userInDb == null)
@@ -55,7 +47,7 @@ namespace Sparkle.Neo4j.Domain.Repository
                 .Match("(u:User {login: {userLogin}}), (f:User {login: {friendLogin}})")
                 .WithParam("userLogin", user.UserName)
                 .WithParam("friendLogin", friend.UserName)
-                .Create("(u)-[r:Friended_With]->(f)")
+                .Create($"(u)-[r:{relation}]->(f)")
                 .ExecuteWithoutResults();
         }
         #endregion
@@ -77,7 +69,7 @@ namespace Sparkle.Neo4j.Domain.Repository
                 .Return<GraphUser>("f").Results.FirstOrDefault();
         }
 
-        public int GetPathLength(User user, User friend)
+        public int PathLengthBetween(User user, User friend)
         {
             var u1 = Get(user.UserName);
             var u2 = Get(friend.UserName);

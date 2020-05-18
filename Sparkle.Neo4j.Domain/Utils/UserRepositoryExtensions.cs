@@ -1,5 +1,5 @@
 ﻿using Sparkle.Domain.Entities;
-using Sparkle.Neo4j.Domain.Repository;
+using Sparkle.Neo4j.Domain.Services;
 
 namespace Sparkle.Neo4j.Domain.Utils
 {

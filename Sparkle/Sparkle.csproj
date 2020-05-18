@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sparkle.Domain\Sparkle.Domain.csproj" />
+    <ProjectReference Include="..\Sparkle.Neo4j.Domain\Sparkle.Neo4j.Domain.csproj" />
   </ItemGroup>
 
 

@@ -4,32 +4,18 @@ db = conn.getDB("network");
 db.users.drop();
 db.posts.drop();
 
-
-
 load("./User/add_user.js");
 load("./Friend/add_friend.js");
-load("./db_data.js");
 
 add_user("admin", "admin", "admin@sparkle.com", "Taras","Sharko","20", ISODate("1990-10-10"), [], 1, []);
 add_user("sofa", "sofa", "legkasofia@gmail.com", "Sofia", "Lehka", "20", ISODate("1999-11-18"), [], 1, []);
-add_user("pie", "pie", "pie@sparkle.com", "Pie", "Tree", "2", ISODate("2018-01-01"), [], 1, []);
+add_user("ivan", "ivan", "pie@sparkle.com", "Ivan", "Ivaniv", "2", ISODate("2018-01-01"), [], 1, []);
+add_user("marta","marta", "ysharko@sparkle.com", "Marta", "Kyzuk", "15", ISODate("2005-03-09"), [],1,[]);
+add_user("olya", "olya","olena@sparkle.com", "Olya", "Dorosh", "21", ISODate("1998-04-12"),[],1,[]);
+add_user("petro", "petro","stepan@sparkle.com", "Petro", "Sharko", "25", ISODate("1995-03-21"),[],1,[]);
 
-addFriends("admin", ["sofa", "pie"]);
-addFriends("sofa", ["pie", "admin"]);
-
-for(i = 0; i < names.length; i++) {
-    var nameInd = random(0, names.length-1);
-    var surnameInd = random(0, surnames.length-1);
-    var name = names[nameInd];
-    var surname = surnames[surnameInd];
-    var userName = name.slice(0,3) + surname.slice(surname.length-4);
-    var password = userName;
-    var email = name+surname+"@sparkle.com";
-    var dateOfBirth = new Date(`${random(1970,2012)}-${random(1,13)}-${random(1,28)}`);
-    var age = new Date(Date.now()).getFullYear() - new Date(Date.parse(dateOfBirth)).getFullYear();
-    var userStatus = 1;
-    add_user(userName,password,email,name,surname,age, dateOfBirth,[],userStatus,[]);
-
-}
-
-
+addFriends("admin", ["sofa", "ivan"]);
+addFriends("sofa", ["admin"]);
+addFriends("ivan", ["marta","sofa"]);
+addFriends("olya", ["marta"]);
+addFriends("marta", ["olya"]);
