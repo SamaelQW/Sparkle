@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sparkle.Domain.Core.Utils;
 using Sparkle.Domain.Entities;
 using Sparkle.Domain.Services;
 using Sparkle.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sparkle.Controllers
@@ -28,8 +28,6 @@ namespace Sparkle.Controllers
 
 
         #region Action Methods
-
-
         [HttpGet]
         [Route("/Friends")]
         public async Task<IActionResult> Friends()
@@ -50,10 +48,9 @@ namespace Sparkle.Controllers
             {
                 User = await _userService.GetByUserNameAsync(userName),
             };
-            model.Posts = (await _postService.GetAsync()).Where(p => p.OwnerUserName == model.User.UserName);
+            model.Posts = _postService.GetSelfPosts(model.User);
             return View(model);
         }
-
         #endregion
 
         #region Helper Methods
@@ -66,6 +63,5 @@ namespace Sparkle.Controllers
         }
 
         #endregion
-
     }
 }

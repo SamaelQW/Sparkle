@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Sparkle.Domain.Core.Utils;
 using Sparkle.Domain.Entities;
 using Sparkle.Domain.Services;
 using Sparkle.Models;
@@ -21,7 +22,7 @@ namespace Sparkle.Controllers
         private readonly UserService _userService;
         private readonly LikeService _likeService;
 
-        private UserProfileViewModel user;
+        private UserProfileViewModel userViewModel;
         #endregion
 
         #region Constructor
@@ -84,11 +85,9 @@ namespace Sparkle.Controllers
         [Route("/Profile")]
         public IActionResult Profile()
         {
-            if (user == null)
-            {
-                user = GetUser();
-            }
-            return View(user);
+            userViewModel ??= GetUser();
+            userViewModel.Posts = _postService.GetSelfPosts(userViewModel.User);
+            return View(userViewModel);
         }
 
 
