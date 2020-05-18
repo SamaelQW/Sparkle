@@ -1,0 +1,113 @@
+﻿@import "Data/variables";
+@import "Data/mixins";
+@import "./Layout/_header";
+@import "./Layout/_footer";
+.container{
+    width: 1170px;
+    margin: 0 auto;
+    
+    @include grid;
+}
+
+.content {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: #d4a044;
+    border-radius: 10px 10px;
+}
+
+.login-form {
+    background-color: #817e7e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    @include font($size:20px);
+
+    .form-group {
+        display: inherit;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        input {
+            border: none;
+            height: 24px;
+            border-radius: 10px 10px;
+            outline: none;
+            padding-left: 10px;
+            font-family: 'Comic Sans MS';
+            @include font();
+        }
+    }
+
+    .login__button {
+        align-self: center;
+        width: 100px;
+        height: 25px;
+        border: none;
+        border-radius: 15px 15px;
+        @include font();
+        font-family: 'Comic Sans MS';
+        cursor: pointer;
+        background-color: #71e469;
+        outline: none;
+        box-shadow: 0px 6px 10px 0px #3d7d38;
+        transition: .2s;
+
+        &:hover {
+            background-color: darken(#71e469, 15%);
+        }
+
+        &:active {
+            transform: scaleY(20px);
+        }
+    }
+
+    a {
+        align-self: center;
+        color: red;
+        text-decoration: none;
+        margin-top: 10px;
+        font-family: 'Comic Sans MS';
+        background-color: #71e469;
+        border-radius: 15px 15px;
+        @include font();
+        width: 100px;
+        height: 25px;
+        text-align: center;
+        box-shadow: 0px 6px 10px 0px #3d7d38;
+        transition: .2s;
+
+        &:hover {
+            background-color: #34d828;
+        }
+    }
+}
+
+.header {
+    justify-content: center;
+
+    &__title {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 60px;
+        font-weight: 600;
+        font-family: 'Consolas', sans-serif;
+        text-shadow: 20px 15px 3px #852b00;
+        color: #4904ce;
+        cursor: default;
+        transition: .5s;
+
+        &:hover {
+            text-shadow: 20px -20px 10px #852b00;
+        }
+    }
+
+
+}
+
+
+@import "./Account/_register";

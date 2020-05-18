@@ -1,0 +1,31 @@
+﻿@model  UserProfileViewModel
+@{
+    ViewData["Title"] = Model.User.Name + ' ' + Model.User.Surname;
+}
+
+<div class="profile-content">
+    <h1 class="profile-content__full-name full-name">@Model.User.Name @Model.User.Surname</h1>
+
+    <div class="separator"></div>
+
+    <div class="profile-content__info info">
+        
+        <span class="info__age">Age: @Model.User.Age</span>
+        <span class="info__date-of-birth">Date of birth: @Model.User.DateOfBirth.ToShortDateString()</span>
+        <span class="info__email">Email: @Model.User.Email</span>
+    </div>
+
+    <div class="profile-content__edit-btn edit-btn">
+        <a asp-action="Edit" asp-controller="Home">Edit</a>
+    </div>
+
+    <div class="separator"></div>
+    <!---->
+    
+
+    <div class="profile-content__user-posts user-posts">
+        @{await Html.RenderPartialAsync("Post")}
+    </div>
+</div>
+
+

@@ -1,0 +1,19 @@
+﻿@model FriendsListViewModel
+
+<div class="friend-content">
+    
+    @foreach (var friend in Model.Friends)
+    {
+        <div class="user-row">
+            <div class="user-row__picture">
+                Photo
+            </div>
+            <div class="user-row__fullname">
+                <a  class="user-row__link" asp-action="Profile" asp-controller="Friend" asp-route-userName="@friend.Username">
+                @friend.Name @friend.Surname
+                </a>
+            </div>
+        </div>
+    }
+</div>
+

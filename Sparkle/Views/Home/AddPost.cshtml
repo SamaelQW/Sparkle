@@ -1,0 +1,17 @@
+﻿@model Sparkle.Domain.Entities.Post
+
+@{
+    ViewData["Title"] = "AddPost";
+}
+
+<div class="add-post_content">
+    <h1>AddPost</h1>
+    <form class="add-post__form" method="post" asp-action="AddPost" asp-controller="Home" >
+        <input type="hidden" name="Id"/>
+        <input type="hidden" name="CreatedDate" value="" />
+        <input type="hidden" name="OwnerUserName" value="@User.Identity.Name" />
+        <textarea name="Body" placeholder="New post"></textarea>
+
+        <input type="submit" asp-action="AddPost" asp-controller="Home" value="Create" />
+    </form>
+</div>

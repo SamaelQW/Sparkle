@@ -1,0 +1,22 @@
+﻿body {
+    background-color: #5c486c;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+a{
+    text-decoration:none;
+}
+
+@import "./Layout/_Layout";
+
+
+
+@import "./Home/Index/_posts";
+@import "./Home/Index/_feed";
+@import "./Home/Profile/_profile";
+@import "./Account/_login";
+@import "./Home/AddPost/_addPost";
+@import "./Post/_postView";
+@import "./Home/Edit/_editProfile";
+@import "./Friend/_friends";
+@import "./Search/_search";

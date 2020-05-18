@@ -1,0 +1,30 @@
+﻿@import "../Data/_variables";
+@import "../Data/_mixins";
+
+.container {
+    max-width: $main-width;
+    width: $main-width;
+    margin: 0 auto;
+    padding: 0;
+    //---------------
+    @include grid();
+    grid-template-columns: $nav-width;
+    grid-template-rows: max-content;
+    grid-gap: $grid-gap-size;
+    grid-template-columns: max-content;
+}
+
+@import "./_header";
+@import "./_nav";
+@import "./footer";
+
+.content {
+    border: 1px solid black;
+    border-radius: 10px 10px;
+    width: auto;
+    height: auto;
+    //---------------
+    grid-row: 2;
+    grid-column: 2;
+}
+

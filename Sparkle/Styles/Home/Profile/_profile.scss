@@ -1,0 +1,48 @@
+﻿@import "../../Data/variables";
+@import "../../Data/mixins";
+
+.profile-content {
+    border-radius: inherit;
+    background-color: #29a33b;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Comic Sans MS';
+
+    &__full-name {
+        align-self: flex-start;
+        margin-left: 1em;
+    }
+
+    &__user-posts {
+        width: auto;
+        align-self: flex-end;
+        margin-right: 3em;
+
+        .post {
+            width: 400px;
+        }
+    }
+
+    &__edit-btn{
+            @include font($size: 20px, $weight: 600);
+            align-self: flex-end;
+            margin-right: 15px;
+            a{
+                color: #b51515;
+            }
+    }
+
+    .separator {
+        border-bottom: 1px solid #000;
+    }
+
+    &__info {
+        @include font($weight: 600);
+        align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to bottom, #8a4949, #573d63);
+        padding: 10px;
+        color:white;
+    }
+}

@@ -1,0 +1,13 @@
+﻿@model Comment
+
+    <div class="comment">
+        <div class="comment__owner">
+            <a asp-action="Profile" asp-controller="Friend" asp-route-userName="@Model.OwnerUserName"> @Model.OwnerName @Model.OwnerSurname </a>
+        </div>
+        <div class="comment__body">
+            @Model.Body
+        </div>
+        <div class="comment__created-date">
+            @Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+        </div>
+    </div>

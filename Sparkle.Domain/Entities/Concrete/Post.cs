@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
 
 namespace Sparkle.Domain.Entities
 {
@@ -10,23 +12,48 @@ namespace Sparkle.Domain.Entities
     public class Post : IEntity
     {
         /// <summary>
-        /// Post id
+        /// The post's id
         /// </summary>
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Post titile
+        /// The post created by 
         /// </summary>
-        [BsonElement("title")]
-        public string Title { get; set; }
+        [BsonElement("createdBy")]
+        public string CreatedBy { get; set; }
 
         /// <summary>
-        /// Post category
+        /// The post's body
         /// </summary>
-        [BsonElement("category")]
-        public string Category { get; set; }
+        [BsonElement("body")]
+        public string Body { get; set; }
+
+        /// <summary>
+        /// The post's created date
+        /// </summary>
+        [BsonElement("createdDate")]
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// The post's owner username
+        /// </summary>
+        [BsonElement("owner")]
+        public string OwnerUserName { get; set; }
+
+        /// <summary>
+        /// The comments under <see cref="Post"/>
+        /// </summary>
+        [BsonElement("comments")]
+        public List<Comment> Comments { get; set; }
+
+        /// <summary>
+        /// Likes under post
+        /// </summary>
+        [BsonElement("likes")]
+        public List<Like> Likes { get; set; }
+
 
     }
 }

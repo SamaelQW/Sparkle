@@ -1,8 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Posts";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="feed-container">
+    <div class="add-btn">
+        <a class="page-link add-link" asp-controller="Home" asp-action="AddPost">Add Post</a>
+    </div>
+    <div class="posts">
+        @{await Html.RenderPartialAsync("Post", new PostRenderViewModel { User = User, TypeOfRender = GlobalConstants.PostViewConstants.FriendPosts });};
+    </div>
 </div>

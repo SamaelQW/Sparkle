@@ -1,0 +1,39 @@
+﻿@import "../Data/mixins";
+@import "../Data/variables";
+
+.register-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    border-radius:15px 15px;
+    &__form {
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            flex-flow: column;
+
+            .form-group {
+                margin-top: 5px;
+                margin-bottom: 5px;
+                font-family: 'Comic Sans MS';
+
+                label {
+                    @include font($weight: 600);
+                }
+
+                input {
+                    border: none;
+                    border-radius: 10px 10px;
+                    padding-left: 10px;
+                    height: 25px;
+                    outline: none;
+                    @include font();
+                    min-width: 223px;
+                }
+            }
+        }
+    }
+}

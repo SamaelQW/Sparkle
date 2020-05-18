@@ -1,0 +1,49 @@
+﻿@model PostViewModel
+
+@{
+    ViewData["Title"] = $"{Model.Post.CreatedBy} - Post";
+}
+    <div class="post-content">
+
+        <div class="postId" style="display:none">@Model.Post.Id</div>
+
+        <div class="post-content__title">@Model.Post.CreatedBy</div>
+        
+        @if(Model.User.UserName == Model.Post.OwnerUserName)
+        {
+            <div class="post__remove-btn" onclick="removePost('@Model.Post.Id')"><img alt="Remove post" src="https://img.icons8.com/ios/50/000000/delete-sign.png"></div>
+        }
+
+        <div class="post-content__date">@Model.Post.CreatedDate.ToString("dd/MM/yyyy HH:mm")</div>
+        <div class="separator"></div>
+        <div class="post-content__body">
+            @Model.Post.Body
+        </div>
+        <div class="separator"></div>
+        <div class="post-content__comments">
+            @if (Model.Post.Comments == null || Model.Post.Comments.Count == 0)
+            {
+                <div class="no-comments">
+                    No comments yet.
+                </div>
+            }
+            else
+            {
+                foreach (Comment comment in Model.Post.Comments)
+                {
+                   await Html.RenderPartialAsync("NewComment", comment);
+                }
+            }
+        </div>
+        <div class="add-comment-area">
+            <form>
+
+                <input type="hidden" name="PostId" value="@Model.Post.Id" />
+                <input type="hidden" name="OwnerName" value="@Model.User.Name" />
+                <input type="hidden" name="OwnerSurname" value="@Model.User.Surname" />
+                <input type="hidden" name="OwnerUserName" value="@Model.User.UserName" />
+                <textarea name="Body" placeholder="Comment"></textarea>
+                <input type="button" value="Send" onclick="renderNewComment()" />
+            </form>
+        </div>
+    </div>
